@@ -1,6 +1,7 @@
 package com.agileim.petstore.model.mapper;
 
 
+import com.agileim.petstore.model.dto.BasePetDTO;
 import com.agileim.petstore.model.dto.PetDTO;
 import com.agileim.petstore.model.entity.Pet;
 import org.mapstruct.Mapper;
@@ -17,9 +18,15 @@ public interface PetMapper {
     @Mapping(source = "tags", target = "tags")
     PetDTO entityToDto(Pet pet);
 
-    @Mapping(source = "id", target = "id")
+
+    @Mapping(target = "id", ignore = true)
     @Mapping(source = "name", target = "name")
     @Mapping(source = "tags", target = "tags")
     Pet dtoToEntity(PetDTO petDTO);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "tags", target = "tags")
+    Pet basePetDTOToEntity(BasePetDTO basePetDTO);
 
 }

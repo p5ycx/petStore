@@ -1,6 +1,8 @@
 package com.agileim.petstore.services;
 
+import com.agileim.petstore.model.dto.BasePetDTO;
 import com.agileim.petstore.model.dto.PetDTO;
+import com.agileim.petstore.model.entity.Pet;
 import com.agileim.petstore.model.mapper.PetMapper;
 import com.agileim.petstore.repositories.PetRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,9 @@ public class PetService {
         this.mapper = mapper;
     }
 
-    public PetDTO createPet(PetDTO petDTO) {
-        return mapper.entityToDto(repository.save(mapper.dtoToEntity(petDTO)));
+    public PetDTO createPet(BasePetDTO basePetDTO) {
+        Pet petEntity = mapper.basePetDTOToEntity(basePetDTO);
+        Pet savedPet = repository.save(petEntity);
+        return mapper.entityToDto(savedPet);
     }
 }
