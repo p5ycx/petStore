@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,5 +41,15 @@ public class PetService {
             limit = MAX_PAGE_SIZE;
         }
         return repository.findAll(PageRequest.of(offset, limit)).stream().map(mapper::entityToDto).collect(Collectors.toList());
+    }
+
+    public PetDTO updatePetDetails(String id, PetDTO petModel) {
+        Optional<Pet> pet = repository.findById(Long.parseLong(id));
+        if (pet.isEmpty()) {
+            throw new PetNotFoundException();
+        }
+        petModel.setId(Long.parseLong(id));
+        Pet updatedPet = mapper.dtoToEntity(petModel);
+        return mapper.entityToDto(repository.save(updatedPet));
     }
 }

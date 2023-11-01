@@ -36,5 +36,8 @@ public class PetsController {
         return petsService.getPetById(petId);
     }
 
-
+    @PutMapping("/{petId}")
+    public PetDTO updatePet(@PathVariable String petId, @RequestBody(required = true) PetDTO petDTO) {
+        return petsService.updatePetDetails(petId, petDTO);
+    }
 }
