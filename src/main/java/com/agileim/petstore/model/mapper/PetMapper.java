@@ -19,7 +19,6 @@ public interface PetMapper {
     PetDTO entityToDto(Pet pet);
 
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(source = "name", target = "name")
     @Mapping(source = "tags", target = "tags")
     Pet dtoToEntity(PetDTO petDTO);
