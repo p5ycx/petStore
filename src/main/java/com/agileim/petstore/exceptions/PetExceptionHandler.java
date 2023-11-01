@@ -19,7 +19,7 @@ public class PetExceptionHandler extends ResponseEntityExceptionHandler {
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         PetStoreExceptionResponse badEx = new PetStoreExceptionResponse();
         badEx.setMessage("Pet Id provided is not valid.");
-        badEx.setCode("PET NOT FOUND");
+        badEx.setCode("NOT FOUND");
         return new ResponseEntity<>(badEx, HttpStatus.BAD_REQUEST);
     }
 
@@ -27,7 +27,7 @@ public class PetExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         PetStoreExceptionResponse error = new PetStoreExceptionResponse();
         error.setMessage("Method is not supported");
-        error.setCode("METHOD UNSUPPORTED");
+        error.setCode("UNSUPPORTED");
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
