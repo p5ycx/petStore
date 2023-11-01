@@ -1,5 +1,6 @@
 package com.agileim.petstore.services;
 
+import com.agileim.petstore.exceptions.PetNotFoundException;
 import com.agileim.petstore.model.dto.BasePetDTO;
 import com.agileim.petstore.model.dto.PetDTO;
 import com.agileim.petstore.model.entity.Pet;
@@ -28,6 +29,10 @@ public class PetService {
         Pet petEntity = mapper.basePetDTOToEntity(basePetDTO);
         Pet savedPet = repository.save(petEntity);
         return mapper.entityToDto(savedPet);
+    }
+
+    public PetDTO getPetById(String id) {
+        return mapper.entityToDto(repository.findById(Long.parseLong(id)).orElseThrow(PetNotFoundException::new));
     }
 
     public List<PetDTO> getAllPets(Integer offset, Integer limit) {

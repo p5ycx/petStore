@@ -29,4 +29,12 @@ public class PetsController {
     public List<PetDTO> listPets(@RequestParam(value = "limit", defaultValue = "100") Integer limit, @RequestParam(value = "offset", defaultValue = "0") Integer offset) {
         return petsService.getAllPets(offset, limit);
     }
+
+    @GetMapping("/{petId}")
+    public PetDTO showPetById(
+            @PathVariable String petId) {
+        return petsService.getPetById(petId);
+    }
+
+
 }
